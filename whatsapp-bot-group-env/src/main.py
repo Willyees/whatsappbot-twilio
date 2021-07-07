@@ -13,9 +13,9 @@ def root():
 def botWebHook():
     msg = request.values.get("Body", "").lower()
     # check msg contains all keywords when setting up meeting
-    keywords = ["tuesday", "sighthill", "power", "league"]
+    keywords = ["tuesday"]  # ["tuesday", "sighthill", "power", "league"]
     lst = [...]
-    if all((word in lst for word in keywords)):
+    if all((word in msg for word in keywords)):
         resp = MessagingResponse()
         body_resp = resp.message(
             body="in"
