@@ -13,17 +13,17 @@ def root():
 def botWebHook():
     msg = request.values.get("Body", "").lower()
     # check msg contains all keywords when setting up meeting
+    print("received: " + msg)
     keywords = ["tuesday"]  # ["tuesday", "sighthill", "power", "league"]
-    lst = [...]
+    resp = MessagingResponse()
+    resp_msg = resp.message()
     if all((word in msg for word in keywords)):
-        resp = MessagingResponse()
-        body_resp = resp.message(
-            body="in"
-        )  # automatic response in case strings were found
-        return "message received and a response has been sent"
+        resp_msg.body("in")
+        return str(resp)
 
     print("message received but a match could not be found")  # debug on console
-    return "message received but a match could not be found"  # debug on browser
+    resp_msg.body("could not find match")
+    return str(resp)  # return xml format string, will be redirected
 
 
 if __name__ == "__main__":
